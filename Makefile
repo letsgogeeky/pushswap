@@ -6,19 +6,19 @@
 #    By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 20:26:46 by ramoussa          #+#    #+#              #
-#    Updated: 2023/08/30 12:49:08 by ramoussa         ###   ########.fr        #
+#    Updated: 2023/09/01 00:20:21 by ramoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= push_swap
 
-CFLAGS	:= -Wextra -Wall -Werror -g -fsanitize=address
+CFLAGS	:= -Wextra -Wall -Werror -g # -fsanitize=address
 BASELIB := ./lib/ft-baselib
 
 HEADERS := -I ./include -I ${BASELIB}/include
 LIBS := ${BASELIB}/baselib.a
 
-SRCS := main.c
+SRCS := stack.c main.c
 OBJS := ${addprefix src/, ${SRCS:.c=.o}}
 
 all: BASELIB ${NAME}
