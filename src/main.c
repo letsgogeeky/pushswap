@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:50 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/01 00:53:26 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/01 03:32:13 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	int	idx;
 	t_program	*env;
 	long long	current;
-	t_stack		*a_cursor;
+	t_doubly_list		*a_cursor;
 
 	if (argc < 2)
 		return (1);
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 		ft_printf("Error\n");
 		return (1);
 	}
-	env->a = create_node(current);
+	env->a = create_node(NULL, NULL, current);
 	a_cursor = env->a;
 	idx++;
 	while(argv[idx])
@@ -57,10 +57,12 @@ int	main(int argc, char **argv)
 			ft_printf("Error: Duplicate!!\n");
 			return (1);
 		}
-		a_cursor->next = create_node(current);
+		a_cursor->next = create_node(env->a, a_cursor, current);
 		a_cursor = a_cursor->next;
 		idx++;
 	}
+	sa(env);
+	ra(env);
 	print_stack(env->a);
 	return (0);
 }
