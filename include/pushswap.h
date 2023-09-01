@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:54 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/01 03:32:03 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:30:30 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ int				is_duplicate(t_doubly_list *stack, int num);
 void			sa(t_program *env);
 
 void			ra(t_program *env);
+void			pa(t_program *env);
+void			pb(t_program *env);
 
 #endif

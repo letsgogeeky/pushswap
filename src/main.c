@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:50 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/01 03:32:13 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/01 19:32:07 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,14 @@ int	main(int argc, char **argv)
 		a_cursor = a_cursor->next;
 		idx++;
 	}
-	sa(env);
-	ra(env);
+	// sa(env);
+	// ra(env);
+	ft_printf("Printing A\n");
+	print_stack(env->a);
+	ft_printf("Printing B\n");
+	pb(env);
+	print_stack(env->b);
+	ft_printf("Printing A\n");
 	print_stack(env->a);
 	return (0);
 }
