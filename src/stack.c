@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 20:05:25 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/01 03:50:53 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/01 23:45:21 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ t_doubly_list*	create_node(t_doubly_list *head, t_doubly_list *prev, int data)
 	node->next = head;
 	if (head)
 		head->prev = node;
+	else
+	{
+		node->next = node;
+		node->prev = node;
+	}
 	return (node);
 }
 

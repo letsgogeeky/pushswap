@@ -6,11 +6,36 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:50 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/01 19:32:07 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/02 00:46:12 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+void	insert_sorted(t_program *env)
+{
+	if (!env->b)
+	{
+		pb(env);
+		return ;
+	}
+	if (env->a->data < env->b->data)
+	{
+		while (env->a->data < env->b->data && env->a->data < env->b->prev->data)
+			rra(env);
+		while (env->a->data > env->b->data && env->a->data > env->b->next->data)
+			ra(env);
+	}
+}
+
+void	stack_iterato(t_program *env)
+{
+	while(env->a)
+	{
+		if (env->a->data > env->a->prev->data && env->a->data > env->a->next->data)
+			insert_sorted(env);
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -66,6 +91,7 @@ int	main(int argc, char **argv)
 	ft_printf("Printing A\n");
 	print_stack(env->a);
 	ft_printf("Printing B\n");
+	pb(env);
 	pb(env);
 	print_stack(env->b);
 	ft_printf("Printing A\n");

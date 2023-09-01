@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:09:35 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/01 19:29:57 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/01 23:59:18 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,20 @@ void	pa(t_program *env)
 		return ;
 	head = env->b;
 	tmp = head->next;
-	if (tmp)
+	if (tmp->data != head->data)
+	{
 		tmp->prev = head->prev;
-	if (head->prev)
 		head->prev->next = tmp;
-	env->b = tmp;
+		env->b = tmp;
+	}
+	else
+		env->b = NULL;
 	tmp = env->a;
 	if (!tmp)
 	{
 		env->a = head;
-		head->next = NULL;
-		head->prev = NULL;
+		head->next = head;
+		head->prev = head;
 	}
 	else
 	{
@@ -52,17 +55,20 @@ void	pb(t_program *env)
 		return ;
 	head = env->a;
 	tmp = head->next;
-	if (tmp)
+	if (tmp->data != head->data)
+	{
 		tmp->prev = head->prev;
-	if (head->prev)
 		head->prev->next = tmp;
-	env->a = tmp;
+		env->a = tmp;
+	}
+	else
+		env->a = NULL;
 	tmp = env->b;
 	if (!tmp)
 	{
 		env->b = head;
-		head->next = NULL;
-		head->prev = NULL;
+		head->next = head;
+		head->prev = head;
 	}
 	else
 	{
