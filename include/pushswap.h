@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:54 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/02 00:03:08 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/02 16:05:59 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ typedef struct s_program
 	t_doubly_list		*b;
 	size_t		a_len;
 	size_t		b_len;
+	int			min_in_a;
+	int			max_in_a;
+	int			min_in_b;
+	int			max_in_b;
 }	t_program;
 
 t_doubly_list	*create_node(t_doubly_list *head, t_doubly_list *prev, int data);
@@ -42,6 +46,8 @@ void			sa(t_program *env);
 void			ra(t_program *env);
 void			rb(t_program *env);
 void			rr(t_program *env);
+void			rra(t_program *env);
+void			rrb(t_program *env);
 void			pa(t_program *env);
 void			pb(t_program *env);
 

@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:09:35 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/01 23:59:18 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/02 18:53:24 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	pa(t_program *env)
 		tmp->prev = head;
 		env->a = head;
 	}
+	ft_printf("pa\n");
 }
 
 void	pb(t_program *env)
@@ -78,4 +79,5 @@ void	pb(t_program *env)
 		tmp->prev = head;
 		env->b = head;
 	}
+	ft_printf("pb\n");
 }
