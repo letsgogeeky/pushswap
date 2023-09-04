@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 20:05:25 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/01 23:45:21 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/04 23:56:33 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,20 @@ int	is_duplicate(t_doubly_list *stack, int num)
 			break;
 	}
 	return (0);
+}
+
+int	is_sorted(t_doubly_list *stack)
+{
+	t_doubly_list	*current;
+
+	current = stack;
+	while(1)
+	{
+		if (current->next->data == stack->data)
+			break ;
+		if (current->data > current->next->data)
+			return (0);
+		current = current->next;
+	}
+	return (1);
 }

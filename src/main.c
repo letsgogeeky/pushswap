@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:50 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/02 19:44:11 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/05 01:19:29 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,23 @@ void	insert_sorted(t_program *env)
 	}
 	if (env->a->data < env->b->data)
 	{
-		while (env->a->data < env->b->data)
+		while (env->a->data < env->b->data && env->b->prev->data != env->max_in_b)
+			rrb(env);
+		if (env->b->prev->data == env->max_in_b && env->a->data < env->b->data)
 			rrb(env);
 	}
 	else
 	{
-		while (env->a->data > env->b->data && env->b->data < env->b->next->data)
+		while (env->a->data > env->b->data && env->b->next->data != env->min_in_b)
 			rb(env);
-		if (env->a->data > env->max_in_b)
+		if (env->b->next->data == env->min_in_b && env->a->data > env->b->data)
 			rb(env);
 	}
+	pb(env);
 	if (env->b->data > env->max_in_b)
 		env->max_in_b = env->b->data;
 	if (env->b->data < env->min_in_b)
 		env->min_in_b = env->b->data;
-	pb(env);
 }
 
 void	stack_iterator(t_program *env)
@@ -113,6 +115,12 @@ int	main(int argc, char **argv)
 		a_cursor->next = create_node(env->a, a_cursor, current);
 		a_cursor = a_cursor->next;
 		idx++;
+	}
+	print_stack(env->a);
+	if (is_sorted(env->a))
+	{
+		ft_printf("List already sorted!\n");
+		return (0);
 	}
 	// sa(env);
 	// ra(env);
