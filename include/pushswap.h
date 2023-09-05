@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:54 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/04 23:33:51 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/06 01:15:25 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ typedef struct s_program
 }	t_program;
 
 t_doubly_list	*create_node(t_doubly_list *head, t_doubly_list *prev, int data);
-void			print_stack(t_doubly_list *stack);
+void			print_stack(t_doubly_list *stack, char separator);
 int				is_duplicate(t_doubly_list *stack, int num);
 int				is_sorted(t_doubly_list *stack);
 
 void			sa(t_program *env);
-
+void			sb(t_program *env);
 void			ra(t_program *env);
 void			rb(t_program *env);
 void			rr(t_program *env);

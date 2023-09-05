@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 20:05:25 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/04 23:56:33 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/06 00:56:18 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ t_doubly_list*	create_node(t_doubly_list *head, t_doubly_list *prev, int data)
 	return (node);
 }
 
-void	print_stack(t_doubly_list *stack)
+void	print_stack(t_doubly_list *stack, char separator)
 {
 	t_doubly_list	*current;
 
 	current = stack;
 	while(current)
 	{
-		ft_printf("%d\n", current->data);
+		ft_printf("%d%c", current->data, separator);
 		current = current->next;
 		if (current && current->data == stack->data)
 			break;

@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:50 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/05 01:19:29 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/06 01:55:25 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,58 +23,72 @@ iter 4: rrb -> 	a = 2					|| b = 1 - 6 - 8 - 9
 iter 4: rrb -> 	a = 2					|| b = 6 - 8 - 9 - 1
 iter 4: pb ->	a = NULL				|| b = 2 - 6 - 8 - 9 - 1
 */
-void	insert_sorted(t_program *env)
+void	update_min_max(t_doubly_list *stack, int *min, int *max)
 {
-	if (!env->b || env->b->data == env->b->next->data)
-	{
-		pb(env);
-		if (env->b->data > env->max_in_b)
-			env->max_in_b = env->b->data;
-		if (env->b->data < env->min_in_b)
-			env->min_in_b = env->b->data;
-		return ;
-	}
-	if (env->a->data < env->b->data)
-	{
-		while (env->a->data < env->b->data && env->b->prev->data != env->max_in_b)
-			rrb(env);
-		if (env->b->prev->data == env->max_in_b && env->a->data < env->b->data)
-			rrb(env);
-	}
-	else
-	{
-		while (env->a->data > env->b->data && env->b->next->data != env->min_in_b)
-			rb(env);
-		if (env->b->next->data == env->min_in_b && env->a->data > env->b->data)
-			rb(env);
-	}
-	pb(env);
-	if (env->b->data > env->max_in_b)
-		env->max_in_b = env->b->data;
-	if (env->b->data < env->min_in_b)
-		env->min_in_b = env->b->data;
+	if (stack->data > *max)
+		*max = stack->data;
+	if (stack->data < *min)
+		*min = stack->data;
 }
 
-void	stack_iterator(t_program *env)
+int	insert_sorted(t_program *env)
 {
+	t_doubly_list	*head;
+	int				ops;
+
+	head = env->b;
+	ops = 0;
+	while (head != env->b->next)
+	{
+		if (env->a->data > env->max_in_b && env->b->prev->data == env->max_in_b)
+			break;
+		if (env->a->data < env->min_in_b && env->b->data == env->min_in_b)
+			break;
+		if (env->a->data > env->b->prev->data && env->a->data < env->b->data)
+			break;
+		rb(env);
+		ops++;
+	}
+	pb(env);
+	ops++;
+	update_min_max(env->b, &env->min_in_b, &env->max_in_b);
+	// if (env->b->data > env->b->next->data)
+	// 	sb(env);
+	return (ops);
+}
+
+int	stack_iterator(t_program *env)
+{
+	int	operations;
+
+	operations = 0;
 	while(env->a)
 	{
 		// if (env->a->data > env->a->prev->data && env->a->data > env->a->next->data)
-		insert_sorted(env);
+		operations += insert_sorted(env);
+		print_stack(env->b, ' ');
 		// else if (env->a->data < env->a->)
 	}
+	while (env->b->data != env->min_in_b)
+	{
+		rb(env);
+		operations++;
+	}
+	return (operations);
 }
 
 int	main(int argc, char **argv)
 {
-	int	idx;
-	t_program	*env;
-	long long	current;
-	t_doubly_list		*a_cursor;
+	int				idx;
+	t_program		*env;
+	long long		current;
+	t_doubly_list	*a_cursor;
+	int				operations;
 
 	if (argc < 2)
 		return (1);
 	idx = 1;
+	operations = 0;
 	env = (t_program *)malloc(sizeof(t_program));
 	env->length = 0;
 	env->min_in_b = INT_MAX;
@@ -116,12 +130,19 @@ int	main(int argc, char **argv)
 		a_cursor = a_cursor->next;
 		idx++;
 	}
-	print_stack(env->a);
 	if (is_sorted(env->a))
 	{
 		ft_printf("List already sorted!\n");
 		return (0);
 	}
+	pb(env);
+	operations++;
+	update_min_max(env->b, &env->min_in_b, &env->max_in_b);
+	ft_printf("Min: %d, Max: %d\n", env->min_in_b, env->max_in_b);
+	pb(env);
+	operations++;
+	update_min_max(env->b, &env->min_in_b, &env->max_in_b);
+	ft_printf("Min: %d, Max: %d\n", env->min_in_b, env->max_in_b);
 	// sa(env);
 	// ra(env);
 	// ft_printf("Printing A\n");
@@ -134,8 +155,11 @@ int	main(int argc, char **argv)
 	// print_stack(env->a);
 	// ft_printf("Printing A Before sorting\n");
 	// print_stack(env->a);
-	stack_iterator(env);
+	operations += stack_iterator(env);
 	ft_printf("After sorting\n");
-	print_stack(env->b);
+	print_stack(env->b, ' ');
+	ft_printf("\nTotal Operations: %d\n", operations);
+	if (is_sorted(env->b))
+		ft_printf("Oh wow!! it's sorted!!\n");
 	return (0);
 }
