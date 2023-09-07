@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:50 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/07 03:36:17 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/07 12:06:11 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,49 @@ void	update_min_max(t_doubly_list *stack, int *min, int *max)
 	if (stack->data < *min)
 		*min = stack->data;
 }
-
+int	find_pivot(int a, int b, int c)
+{
+	if (a > b && b > c)
+		return (b);
+	if (a > b && a < c)
+		return (a);
+	return (c);
+}
 int	insert_sorted(t_program *env)
 {
 	t_doubly_list	*head;
 	int				ops;
+	int				pivot;
 
 	head = env->b;
 	ops = 0;
-	while (head != env->b->next)
+	pivot = find_pivot(env->a->data, env->min_in_b, env->max_in_b);
+	if (env->a->data >= pivot && env->b->data > pivot && env->a->data < env->b->data)
 	{
-		if (env->a->data > env->max_in_b && env->b->prev->data == env->max_in_b)
-			break;
-		if (env->a->data < env->min_in_b && env->b->data == env->min_in_b)
-			break;
-		if (env->a->data > env->b->prev->data && env->a->data < env->b->data)
-			break;
-		rb(env, env->should_log);
-		ops++;
+		while (head != env->b->prev)
+		{
+			if (env->a->data > env->max_in_b && env->b->prev->data == env->max_in_b)
+				break;
+			if (env->a->data < env->min_in_b && env->b->data == env->min_in_b)
+				break;
+			if (env->a->data > env->b->prev->data && env->a->data < env->b->data)
+				break;
+			rrb(env, env->should_log);
+			ops++;
+		}
+	}
+	else {
+		while (head != env->b->next)
+		{
+			if (env->a->data > env->max_in_b && env->b->prev->data == env->max_in_b)
+				break;
+			if (env->a->data < env->min_in_b && env->b->data == env->min_in_b)
+				break;
+			if (env->a->data > env->b->prev->data && env->a->data < env->b->data)
+				break;
+			rb(env, env->should_log);
+			ops++;
+		}
 	}
 	pb(env);
 	ops++;
@@ -168,5 +193,7 @@ int	main(int argc, char **argv)
 	ft_printf("\nTotal Operations: %d\n", operations);
 	if (is_sorted(env->b))
 		ft_printf("Oh wow!! it's sorted!!\n");
+	else
+		ft_printf("Something got messed up man!!\n");
 	return (0);
 }
