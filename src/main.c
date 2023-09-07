@@ -6,23 +6,12 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:50 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/06 01:55:25 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/07 03:36:17 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-/*
-a = 1 - 9 - 6 - 8 - 2
-iter 0: pb ->	a = 9 - 6 - 8 - 2		|| b = 1 			max = 1, min = 1;
-iter 1: pb ->	a = 6 - 8 - 2 			|| b = 9 - 1		max = 9, min = 1;
-iter 2: pb ->	a = 8 - 2				|| b = 6 - 9 - 1	max = 9, min = 1;
-iter 3: rrb ->	a = 8 - 2				|| b = 9 - 1 - 6
-iter 3: pb ->	a = 2					|| b = 8 - 9 - 1 - 6
-iter 4: rrb ->	a = 2					|| b = 9 - 1 - 6 - 8
-iter 4: rrb -> 	a = 2					|| b = 1 - 6 - 8 - 9
-iter 4: rrb -> 	a = 2					|| b = 6 - 8 - 9 - 1
-iter 4: pb ->	a = NULL				|| b = 2 - 6 - 8 - 9 - 1
-*/
+
 void	update_min_max(t_doubly_list *stack, int *min, int *max)
 {
 	if (stack->data > *max)
@@ -46,7 +35,7 @@ int	insert_sorted(t_program *env)
 			break;
 		if (env->a->data > env->b->prev->data && env->a->data < env->b->data)
 			break;
-		rb(env);
+		rb(env, env->should_log);
 		ops++;
 	}
 	pb(env);
@@ -62,16 +51,40 @@ int	stack_iterator(t_program *env)
 	int	operations;
 
 	operations = 0;
+
 	while(env->a)
 	{
-		// if (env->a->data > env->a->prev->data && env->a->data > env->a->next->data)
-		operations += insert_sorted(env);
+		if (env->a->data < env->a->next->data && env->a->data < env->a->prev->data)
+			operations += insert_sorted(env);
+		else if (env->a->data > env->a->next->data && env->a->prev->data > env->a->next->data)
+		{
+			if (env->a->next->data > env->b->data)
+				rr(env, env->should_log);
+			else
+				ra(env, env->should_log);
+			operations++;
+			operations += insert_sorted(env);
+		}
+		else if (env->a->data > env->a->prev->data && env->a->next->data > env->a->prev->data)
+		{
+			if (env->a->prev->data < env->b->prev->data)
+				rrr(env, env->should_log);
+			else
+				rra(env, env->should_log);
+			operations++;
+			operations += insert_sorted(env);
+		}
+		else 
+		{
+			operations += insert_sorted(env);
+		}
+		// operations += insert_sorted(env);
 		print_stack(env->b, ' ');
 		// else if (env->a->data < env->a->)
 	}
 	while (env->b->data != env->min_in_b)
 	{
-		rb(env);
+		rb(env, env->should_log);
 		operations++;
 	}
 	return (operations);
@@ -93,6 +106,9 @@ int	main(int argc, char **argv)
 	env->length = 0;
 	env->min_in_b = INT_MAX;
 	env->max_in_b = INT_MIN;
+	env->should_log = 1;
+	env->min = INT_MAX;
+	env->max = INT_MIN;
 	while (argv[idx])
 	{
 		env->length++;
@@ -128,6 +144,10 @@ int	main(int argc, char **argv)
 		}
 		a_cursor->next = create_node(env->a, a_cursor, current);
 		a_cursor = a_cursor->next;
+		if (current > env->max)
+			env->max = current;
+		if (current < env->min)
+			env->min = current;
 		idx++;
 	}
 	if (is_sorted(env->a))
@@ -135,26 +155,13 @@ int	main(int argc, char **argv)
 		ft_printf("List already sorted!\n");
 		return (0);
 	}
+	env->pivot = env->min + ((env->max - env->min) / 2);
 	pb(env);
 	operations++;
 	update_min_max(env->b, &env->min_in_b, &env->max_in_b);
-	ft_printf("Min: %d, Max: %d\n", env->min_in_b, env->max_in_b);
 	pb(env);
 	operations++;
 	update_min_max(env->b, &env->min_in_b, &env->max_in_b);
-	ft_printf("Min: %d, Max: %d\n", env->min_in_b, env->max_in_b);
-	// sa(env);
-	// ra(env);
-	// ft_printf("Printing A\n");
-	// print_stack(env->a);
-	// ft_printf("Printing B\n");
-	// pb(env);
-	// pb(env);
-	// print_stack(env->b);
-	// ft_printf("Printing A\n");
-	// print_stack(env->a);
-	// ft_printf("Printing A Before sorting\n");
-	// print_stack(env->a);
 	operations += stack_iterator(env);
 	ft_printf("After sorting\n");
 	print_stack(env->b, ' ');

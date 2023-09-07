@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:54 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/06 01:15:25 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/07 03:34:21 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ typedef struct s_program
 	int			max_in_a;
 	int			min_in_b;
 	int			max_in_b;
+	int			max;
+	int			min;
+	int			pivot;
+	int			should_log;
 }	t_program;
 
 t_doubly_list	*create_node(t_doubly_list *head, t_doubly_list *prev, int data);
@@ -44,11 +48,12 @@ int				is_sorted(t_doubly_list *stack);
 
 void			sa(t_program *env);
 void			sb(t_program *env);
-void			ra(t_program *env);
-void			rb(t_program *env);
-void			rr(t_program *env);
-void			rra(t_program *env);
-void			rrb(t_program *env);
+void			ra(t_program *env, int should_log);
+void			rb(t_program *env, int should_log);
+void			rr(t_program *env, int should_log);
+void			rra(t_program *env, int should_log);
+void			rrb(t_program *env, int should_log);
+void			rrr(t_program *env, int should_log);
 void			pa(t_program *env);
 void			pb(t_program *env);
 

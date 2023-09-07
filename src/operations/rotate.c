@@ -6,28 +6,32 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:09:42 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/02 18:52:52 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/07 02:39:33 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pushswap.h"
 
-void	ra(t_program *env)
+void	ra(t_program *env, int should_log)
 {
 	if (env->a && env->a->next)
 		env->a = env->a->next;
-	ft_printf("ra\n");
+	if (should_log)
+		ft_printf("ra\n");
 }
 
-void	rb(t_program *env)
+void	rb(t_program *env, int should_log)
 {
 	if (env->b && env->b->next)
 		env->b = env->b->next;
-	ft_printf("rb\n");
+	if (should_log)
+		ft_printf("rb\n");
 }
 
-void	rr(t_program *env)
+void	rr(t_program *env, int should_log)
 {
-	ra(env);
-	rb(env);
+	ra(env, 0);
+	rb(env, 0);
+	if (should_log)
+		ft_printf("rr\n");
 }
