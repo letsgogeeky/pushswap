@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:54 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/07 03:34:21 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/10 04:03:42 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include "../lib/ft-baselib/include/baselib.h"
 
+enum e_case
+{
+	HAS_RR,
+	HAS_RRR,
+	ONLY_R,
+	ONLY_RR
+};
+
 typedef struct s_doubly_list
 {
 	int	data;
@@ -22,7 +30,16 @@ typedef struct s_doubly_list
 	struct	s_doubly_list	*prev;
 }	t_doubly_list;
 
-typedef struct s_program
+typedef struct	s_cost_case
+{
+	enum e_case	move_case;
+	int			data;
+	int			double_move_count;
+	int			total_cost;
+	char		higher_cost_stack;
+}	t_cost_case;
+
+typedef struct	s_program
 {
 	char		**argv;
 	int			argc;
