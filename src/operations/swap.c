@@ -6,13 +6,13 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:09:44 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/01 03:47:47 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/29 22:12:59 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pushswap.h"
 
-void	sa(t_program *env)
+void	sa(t_program *env, int should_log)
 {
 	t_doubly_list	*first;
 	t_doubly_list	*second;
@@ -31,9 +31,11 @@ void	sa(t_program *env)
 	env->a = second;
 	first->next->prev = first;
 	second->prev->next = second;
+	if (should_log)
+		ft_printf("sa\n");
 }
 
-void	sb(t_program *env)
+void	sb(t_program *env, int should_log)
 {
 	t_doubly_list	*first;
 	t_doubly_list	*second;
@@ -52,10 +54,14 @@ void	sb(t_program *env)
 	env->b = second;
 	first->next->prev = first;
 	second->prev->next = second;
+	if (should_log)
+		ft_printf("sb\n");
 }
 
-void	ss(t_program *env)
+void	ss(t_program *env, int should_log)
 {
-	sa(env);
-	sb(env);
+	sa(env, 0);
+	sb(env, 0);
+	if (should_log)
+		ft_printf("ss\n");
 }

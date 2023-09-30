@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 20:05:25 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/06 00:56:18 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/30 23:03:28 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_doubly_list*	create_node(t_doubly_list *head, t_doubly_list *prev, int data)
 
 	node = (t_doubly_list *)malloc(sizeof(t_doubly_list));
 	node->data = data;
+	node->idx = 0;
 	node->prev = prev;
 	node->next = head;
 	if (head)
@@ -37,25 +38,23 @@ void	print_stack(t_doubly_list *stack, char separator)
 	current = stack;
 	while(current)
 	{
-		ft_printf("%d%c", current->data, separator);
+		ft_printf("idx: %d | data: %d%c", current->idx, current->data, separator);
 		current = current->next;
 		if (current && current->data == stack->data)
 			break;
 	}
 }
 
-int	is_duplicate(t_doubly_list *stack, int num)
+int	is_duplicate(t_program *env, int num, int to_idx)
 {
-	t_doubly_list	*current;
+	int	idx;
 
-	current = stack;
-	while(current)
+	idx = 0;
+	while (idx < to_idx)
 	{
-		if (current->data == num)
+		if (env->meta[idx] == num)
 			return (1);
-		current = current->next;
-		if (current && current->data == stack->data)
-			break;
+		idx++;
 	}
 	return (0);
 }
