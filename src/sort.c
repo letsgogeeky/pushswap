@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 01:42:56 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/30 01:55:42 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/30 03:05:22 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,16 @@ void	go_big(t_program *env)
 {
 	partition_stack(env);
 	sort_partitions(env);
+}
+
+void	sort_factory(t_program *env)
+{
+	if (env->length == 2)
+		ra(env, env->should_log);
+	if (env->length <= 3)
+		sort_small(env);
+	else if (env->length <= 7)
+		sort_lt_seven(env);
+	else
+		go_big(env);
 }
