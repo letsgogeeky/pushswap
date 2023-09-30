@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 20:05:25 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/06 00:56:18 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:39:34 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_doubly_list*	create_node(t_doubly_list *head, t_doubly_list *prev, int data)
 
 	node = (t_doubly_list *)malloc(sizeof(t_doubly_list));
 	node->data = data;
+	node->idx = 0;
 	node->prev = prev;
 	node->next = head;
 	if (head)
@@ -37,7 +38,7 @@ void	print_stack(t_doubly_list *stack, char separator)
 	current = stack;
 	while(current)
 	{
-		ft_printf("%d%c", current->data, separator);
+		ft_printf("idx: %d | data: %d%c", current->idx, current->data, separator);
 		current = current->next;
 		if (current && current->data == stack->data)
 			break;
