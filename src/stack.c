@@ -6,13 +6,13 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 20:05:25 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/30 23:03:28 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:33:36 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pushswap.h"
 
-t_doubly_list*	create_node(t_doubly_list *head, t_doubly_list *prev, int data)
+t_doubly_list	*create_node(t_doubly_list *head, t_doubly_list *prev, int data)
 {
 	t_doubly_list	*node;
 
@@ -36,12 +36,13 @@ void	print_stack(t_doubly_list *stack, char separator)
 	t_doubly_list	*current;
 
 	current = stack;
-	while(current)
+	while (current)
 	{
-		ft_printf("idx: %d | data: %d%c", current->idx, current->data, separator);
+		ft_printf("idx: %d | data: %d%c", \
+			current->idx, current->data, separator);
 		current = current->next;
 		if (current && current->data == stack->data)
-			break;
+			break ;
 	}
 }
 
@@ -64,7 +65,7 @@ int	is_sorted(t_doubly_list *stack)
 	t_doubly_list	*current;
 
 	current = stack;
-	while(1)
+	while (1)
 	{
 		if (current->next->data == stack->data)
 			break ;

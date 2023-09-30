@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:54 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/30 23:03:50 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:43:07 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,26 @@ typedef struct s_doubly_list
 {
 	int						data;
 	int						idx;
-	struct	s_doubly_list	*next;
-	struct	s_doubly_list	*prev;
+	struct s_doubly_list	*next;
+	struct s_doubly_list	*prev;
 }	t_doubly_list;
 
 typedef struct s_program
 {
-	char		**argv;
-	int			length;
-	int			partitions_count;
-	int			*meta;
-	int			*sorted_meta;
-	t_doubly_list		*a;
-	t_doubly_list		*b;
-	int			should_log;
+	char			**argv;
+	int				length;
+	int				partitions_count;
+	int				*meta;
+	int				*sorted_meta;
+	t_doubly_list	*a;
+	t_doubly_list	*b;
+	int				should_log;
 }	t_program;
 
-t_doubly_list	*create_node(t_doubly_list *head, t_doubly_list *prev, int data);
+t_doubly_list	*create_node( \
+			t_doubly_list *head, \
+			t_doubly_list *prev, \
+			int data);
 void			print_stack(t_doubly_list *stack, char separator);
 int				is_duplicate(t_program *env, int num, int to_idx);
 int				is_sorted(t_doubly_list *stack);

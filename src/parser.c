@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:46:10 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/30 23:04:12 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:36:04 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	abort_exit(t_program *env)
 	free(env->sorted_meta);
 	exit(1);
 }
-int		get_actual_count(t_program *env)
+
+int	get_actual_count(t_program *env)
 {
 	int		count;
 	int		idx;
@@ -34,7 +35,6 @@ int		get_actual_count(t_program *env)
 	return (count);
 }
 
-
 int	get_valid_int(t_program *env, char *str, int to_idx)
 {
 	long long		current;
@@ -46,17 +46,18 @@ int	get_valid_int(t_program *env, char *str, int to_idx)
 		abort_exit(env);
 	return (current);
 }
+
 int	parse(t_program *env)
 {
-	int	idx;
-	long long		current;
-	char			**parts;
-	int				parts_idx;
-	int				lst_idx;
-	
+	int			idx;
+	long long	current;
+	char		**parts;
+	int			parts_idx;
+	int			lst_idx;
+
 	lst_idx = 0;
 	idx = 1;
-	while(env->argv[idx])
+	while (env->argv[idx])
 	{
 		parts = ft_split(env->argv[idx], ' ');
 		parts_idx = 0;
