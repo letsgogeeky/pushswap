@@ -117,4 +117,5 @@ fractol
 lib/MLX42/
 ./pipex
 ./push_swap
+./checker
 push_swap_visualizer/

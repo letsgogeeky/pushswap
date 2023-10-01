@@ -6,11 +6,12 @@
 #    By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 20:26:46 by ramoussa          #+#    #+#              #
-#    Updated: 2023/09/30 22:25:57 by ramoussa         ###   ########.fr        #
+#    Updated: 2023/10/01 02:27:31 by ramoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= push_swap
+B_NAME := checker
 
 CFLAGS	:= -Wextra -Wall -Werror -g # -fsanitize=address
 BASELIB := ./lib/ft-baselib
@@ -21,8 +22,11 @@ LIBS := ${BASELIB}/baselib.a
 SRCS := operations/swap.c operations/rotate.c \
 		operations/reverse.c operations/push.c \
 		meta.c sort.c go_big.c insertion.c \
-		parser.c utils.c stack.c main.c
-OBJS := ${addprefix src/, ${SRCS:.c=.o}}
+		parser.c utils.c stack.c
+MANDATORY := main.c
+BONUS := bonus/checker.c
+OBJS := ${addprefix src/, ${SRCS:.c=.o} ${MANDATORY:.c=.o}}
+BONUS_OBJS := ${addprefix src/, ${SRCS:.c=.o} ${BONUS:.c=.o}}
 
 all: BASELIB ${NAME}
 
@@ -31,6 +35,9 @@ all: BASELIB ${NAME}
 
 ${NAME}: ${OBJS}
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) && echo "Successful build...!"
+
+${B_NAME}: ${BONUS_OBJS}
+	@$(CC) $(CFLAGS) $(BONUS_OBJS) $(LIBS) $(HEADERS) -o $(B_NAME) && echo "Bonus Successful build...!"
 
 BASELIB:
 	@if [ -d ${BASELIB} ]; then\
@@ -41,12 +48,16 @@ BASELIB:
 	fi
 	make --directory=${BASELIB}
 
+bonus: BASELIB ${B_NAME}
+
 clean:
 	@rm -rf $(OBJS)
+	@rm -rf ${BONUS_OBJS}
 
 fclean: clean
 	make fclean --directory=${BASELIB}
 	rm -f ${NAME}
+	rm -f ${B_NAME}
 
 re: fclean all
 

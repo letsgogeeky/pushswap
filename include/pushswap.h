@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:54 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/30 23:03:50 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 01:44:34 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void			build_stacks(t_program *env);
 
 void			sa(t_program *env, int should_log);
 void			sb(t_program *env, int should_log);
+void			ss(t_program *env, int should_log);
 void			ra(t_program *env, int should_log);
 void			rb(t_program *env, int should_log);
 void			rr(t_program *env, int should_log);
