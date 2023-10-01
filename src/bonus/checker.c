@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 01:09:12 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/10/01 19:56:21 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 23:00:58 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,8 @@ int	main(int argc, char **argv)
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
+	free(env->meta);
+	free(env->sorted_meta);
+	abort_exit(env, 0);
 	return (0);
 }

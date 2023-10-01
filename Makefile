@@ -6,14 +6,14 @@
 #    By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 20:26:46 by ramoussa          #+#    #+#              #
-#    Updated: 2023/10/01 19:33:00 by ramoussa         ###   ########.fr        #
+#    Updated: 2023/10/01 22:45:07 by ramoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= push_swap
 B_NAME := checker
 
-CFLAGS	:= -Wextra -Wall -Werror -g -fsanitize=address
+CFLAGS	:= -Wextra -Wall -Werror -g
 BASELIB := ./lib/ft-baselib
 
 HEADERS := -I ./include -I ${BASELIB}/include
