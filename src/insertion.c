@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 21:04:59 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/30 22:51:41 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:39:22 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	build_stacks(t_program *env)
 {
-	int	idx;
+	int				idx;
 	t_doubly_list	*a_cursor;
 
 	idx = 0;
 	parse(env);
 	sort_meta(env);
-	while(idx < env->length)
+	while (idx < env->length)
 	{
 		if (idx == 0)
 		{
@@ -30,7 +30,7 @@ void	build_stacks(t_program *env)
 		else
 		{
 			a_cursor->next = create_node(env->a, a_cursor, env->meta[idx]);
-			a_cursor = a_cursor->next;	
+			a_cursor = a_cursor->next;
 		}
 		a_cursor->idx = get_index_from_meta(env, a_cursor->data);
 		idx++;
