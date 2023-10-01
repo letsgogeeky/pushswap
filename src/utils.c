@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 01:44:33 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/30 03:05:14 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:32:13 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	max_index_in_list(t_doubly_list *stack)
 			biggest = current->idx;
 		current = current->next;
 		if (current && current == stack)
-			break;
+			break ;
 	}
 	return (biggest);
 }
@@ -53,14 +53,14 @@ int	min_index_in_list(t_doubly_list *stack)
 			min = current->idx;
 		current = current->next;
 		if (current && current == stack)
-			break;
+			break ;
 	}
 	return (min);
 }
 
 int	moves_to_idx(t_doubly_list *stack, int idx)
 {
-	int	moves;
+	int				moves;
 	t_doubly_list	*current;
 
 	current = stack;

@@ -19,23 +19,26 @@ typedef struct s_doubly_list
 {
 	int						data;
 	int						idx;
-	struct	s_doubly_list	*next;
-	struct	s_doubly_list	*prev;
+	struct s_doubly_list	*next;
+	struct s_doubly_list	*prev;
 }	t_doubly_list;
 
 typedef struct s_program
 {
-	char		**argv;
-	int			length;
-	int			partitions_count;
-	int			*meta;
-	int			*sorted_meta;
-	t_doubly_list		*a;
-	t_doubly_list		*b;
-	int			should_log;
+	char			**argv;
+	int				length;
+	int				partitions_count;
+	int				*meta;
+	int				*sorted_meta;
+	t_doubly_list	*a;
+	t_doubly_list	*b;
+	int				should_log;
 }	t_program;
 
-t_doubly_list	*create_node(t_doubly_list *head, t_doubly_list *prev, int data);
+t_doubly_list	*create_node( \
+			t_doubly_list *head, \
+			t_doubly_list *prev, \
+			int data);
 void			print_stack(t_doubly_list *stack, char separator);
 int				is_duplicate(t_program *env, int num, int to_idx);
 int				is_sorted(t_doubly_list *stack);

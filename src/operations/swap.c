@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:09:44 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/29 22:12:59 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 00:30:37 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	sa(t_program *env, int should_log)
 	second->prev = tmp;
 	first->next = second->next;
 	second->next = first;
-
 	env->a = second;
 	first->next->prev = first;
 	second->prev->next = second;
@@ -50,7 +49,6 @@ void	sb(t_program *env, int should_log)
 	second->prev = tmp;
 	first->next = second->next;
 	second->next = first;
-
 	env->b = second;
 	first->next->prev = first;
 	second->prev->next = second;
