@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 21:04:59 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/10/01 00:39:22 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:20:30 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@ void	build_stacks(t_program *env)
 		if (idx == 0)
 		{
 			env->a = create_node(0, 0, env->meta[idx]);
+			if (!env->a)
+				abort_exit(env, 1);
 			a_cursor = env->a;
 		}
 		else
 		{
 			a_cursor->next = create_node(env->a, a_cursor, env->meta[idx]);
+			if (!a_cursor->next)
+				abort_exit(env, 1);
 			a_cursor = a_cursor->next;
 		}
 		a_cursor->idx = get_index_from_meta(env, a_cursor->data);

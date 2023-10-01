@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 20:05:25 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/10/01 00:33:36 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 18:19:34 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_doubly_list	*create_node(t_doubly_list *head, t_doubly_list *prev, int data)
 	t_doubly_list	*node;
 
 	node = (t_doubly_list *)malloc(sizeof(t_doubly_list));
+	if (!node)
+		return (NULL);
 	node->data = data;
 	node->idx = 0;
 	node->prev = prev;

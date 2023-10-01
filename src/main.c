@@ -6,11 +6,26 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:50 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/09/30 22:52:55 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 19:55:25 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "../include/pushswap.h"
+
+void	init(t_program *env)
+{
+	env->a = NULL;
+	env->b = NULL;
+	env->should_log = 1;
+	env->length = get_actual_count(env);
+	env->meta = (int *)malloc(sizeof(int) * env->length);
+	env->sorted_meta = (int *)malloc(sizeof(int) * env->length);
+	if (!env->sorted_meta || !env->meta)
+		abort_exit(env, 1);
+	env->partitions_count = 20;
+	if (env->length < 150)
+		env->partitions_count = 7;
+}
 
 int	main(int argc, char **argv)
 {
@@ -19,19 +34,17 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	env = (t_program *)malloc(sizeof(t_program));
-	env->should_log = 1;
+	if (env == NULL)
+		exit(1);
 	env->argv = argv;
-	env->length = get_actual_count(env);
-	env->meta = (int *)malloc(sizeof(int) * env->length + 1);
-	env->sorted_meta = (int *)malloc(sizeof(int) * env->length + 1);
+	init(env);
 	if (ft_strlen(argv[1]) == 0)
-		abort_exit(env);
-	env->partitions_count = 20;
-	if (env->length < 150)
-		env->partitions_count = 7;
+		abort_exit(env, 1);
 	build_stacks(env);
-	if (is_sorted(env->a))
-		return (0);
-	sort_factory(env);
+	free(env->meta);
+	free(env->sorted_meta);
+	if (!is_sorted(env->a))
+		sort_factory(env);
+	abort_exit(env, 0);
 	return (0);
 }
