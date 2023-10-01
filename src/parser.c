@@ -6,31 +6,29 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:46:10 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/10/01 02:22:20 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 19:45:51 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pushswap.h"
 
-void	abort_exit(t_program *env)
-{
-	ft_putstr_fd("Error\n", 2);
-	free(env->meta);
-	free(env->sorted_meta);
-	exit(1);
-}
-
 int	get_actual_count(t_program *env)
 {
 	int		count;
 	int		idx;
+	char	**parts;
 
 	count = 0;
 	idx = 1;
 	while (env->argv[idx])
 	{
-		count += str_arr_len(ft_split(env->argv[idx], ' '));
+		parts = ft_split(env->argv[idx], ' ');
+		if (!parts)
+			abort_exit(env, 1);
+		count += str_arr_len(parts);
 		idx++;
+		str_arr_free(parts);
+		parts = NULL;
 	}
 	return (count);
 }
@@ -41,10 +39,20 @@ int	get_valid_int(t_program *env, char *str, int to_idx)
 
 	current = ra_parse_long(str);
 	if (!ra_is_int(str) || !ra_int_in_bound(current))
-		abort_exit(env);
+		abort_exit(env, 1);
 	if (is_duplicate(env, current, to_idx))
-		abort_exit(env);
+		abort_exit(env, 1);
 	return (current);
+}
+
+static char	**ft_split_guarded(t_program *env, char *str)
+{
+	char	**parts;
+
+	parts = ft_split(str, ' ');
+	if (!parts)
+		abort_exit(env, 1);
+	return (parts);
 }
 
 int	parse(t_program *env)
@@ -59,7 +67,7 @@ int	parse(t_program *env)
 	idx = 1;
 	while (env->argv[idx])
 	{
-		parts = ft_split(env->argv[idx], ' ');
+		parts = ft_split_guarded(env, env->argv[idx]);
 		parts_idx = 0;
 		while (parts[parts_idx])
 		{
@@ -69,6 +77,7 @@ int	parse(t_program *env)
 			lst_idx++;
 			parts_idx++;
 		}
+		str_arr_free(parts);
 		idx++;
 	}
 	return (0);

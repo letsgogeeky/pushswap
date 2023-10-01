@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 01:09:12 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/10/01 01:45:09 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 19:56:21 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,21 @@ static void	perform_operations(t_program *env)
 		if (!line)
 			return ;
 		if (execute_operation(env, line) == -1)
-			abort_exit(env);
+			abort_exit(env, 1);
 		free(line);
 	}
+}
+
+void	init(t_program *env)
+{
+	env->a = NULL;
+	env->b = NULL;
+	env->should_log = 0;
+	env->length = get_actual_count(env);
+	env->meta = (int *)malloc(sizeof(int) * env->length);
+	env->sorted_meta = (int *)malloc(sizeof(int) * env->length);
+	if (!env->sorted_meta || !env->meta)
+		abort_exit(env, 1);
 }
 
 int	main(int argc, char **argv)
@@ -63,13 +75,12 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	env = (t_program *)malloc(sizeof(t_program));
-	env->should_log = 0;
+	if (env == NULL)
+		exit(1);
 	env->argv = argv;
-	env->length = get_actual_count(env);
-	env->meta = (int *)malloc(sizeof(int) * env->length + 1);
-	env->sorted_meta = (int *)malloc(sizeof(int) * env->length + 1);
+	init(env);
 	if (ft_strlen(argv[1]) == 0)
-		abort_exit(env);
+		abort_exit(env, 1);
 	build_stacks(env);
 	perform_operations(env);
 	if (is_sorted(env->a) && !env->b)

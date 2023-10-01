@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:47:54 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/10/01 01:44:34 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:52:38 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ void			partition_stack(t_program *env);
 void			sort_partitions(t_program *env);
 void			sort_factory(t_program *env);
 
-void			abort_exit(t_program *env);
+void			abort_exit(t_program *env, int status);
 #endif

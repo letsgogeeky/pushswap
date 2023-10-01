@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 13:09:35 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/10/01 00:31:20 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 19:53:05 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static t_doubly_list	*set_new_head_b(t_program *env)
 	t_doubly_list	*head;
 	t_doubly_list	*tmp;
 
+	if (!env->b)
+		return (NULL);
 	head = env->b;
 	tmp = head->next;
 	if (tmp->data != head->data)
@@ -35,6 +37,8 @@ static t_doubly_list	*set_new_head_a(t_program *env)
 	t_doubly_list	*head;
 	t_doubly_list	*tmp;
 
+	if (!env->a)
+		return (NULL);
 	head = env->a;
 	tmp = head->next;
 	if (tmp->data != head->data)
@@ -56,6 +60,8 @@ void	pa(t_program *env)
 	if (!env->b)
 		return ;
 	head = set_new_head_b(env);
+	if (!head)
+		return ;
 	tmp = env->a;
 	if (!tmp)
 	{
@@ -82,6 +88,8 @@ void	pb(t_program *env)
 	if (!env->a)
 		return ;
 	head = set_new_head_a(env);
+	if (!head)
+		return ;
 	tmp = env->b;
 	if (!tmp)
 	{
