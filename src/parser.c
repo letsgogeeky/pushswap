@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 21:46:10 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/10/01 19:45:51 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/01 22:51:14 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,19 @@ int	get_actual_count(t_program *env)
 	return (count);
 }
 
-int	get_valid_int(t_program *env, char *str, int to_idx)
+int	get_valid_int(t_program *env, char *str, int to_idx, char **parts)
 {
 	long long		current;
 
 	current = ra_parse_long(str);
-	if (!ra_is_int(str) || !ra_int_in_bound(current))
+	if (!ra_is_int(str) || !ra_int_in_bound(current) \
+			|| is_duplicate(env, current, to_idx))
+	{
+		str_arr_free(parts);
+		free(env->meta);
+		free(env->sorted_meta);
 		abort_exit(env, 1);
-	if (is_duplicate(env, current, to_idx))
-		abort_exit(env, 1);
+	}
 	return (current);
 }
 
@@ -51,7 +55,11 @@ static char	**ft_split_guarded(t_program *env, char *str)
 
 	parts = ft_split(str, ' ');
 	if (!parts)
+	{
+		free(env->meta);
+		free(env->sorted_meta);
 		abort_exit(env, 1);
+	}
 	return (parts);
 }
 
@@ -71,7 +79,7 @@ int	parse(t_program *env)
 		parts_idx = 0;
 		while (parts[parts_idx])
 		{
-			current = get_valid_int(env, parts[parts_idx], lst_idx);
+			current = get_valid_int(env, parts[parts_idx], lst_idx, parts);
 			env->meta[lst_idx] = current;
 			env->sorted_meta[lst_idx] = current;
 			lst_idx++;
