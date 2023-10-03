@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 01:09:12 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/10/01 23:00:58 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/10/03 22:41:42 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,13 @@ static void	perform_operations(t_program *env)
 		if (!line)
 			return ;
 		if (execute_operation(env, line) == -1)
+		{
+			get_next_line(-1);
+			free(line);
+			free(env->meta);
+			free(env->sorted_meta);
 			abort_exit(env, 1);
+		}
 		free(line);
 	}
 }
