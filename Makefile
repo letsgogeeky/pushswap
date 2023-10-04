@@ -6,7 +6,7 @@
 #    By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 20:26:46 by ramoussa          #+#    #+#              #
-#    Updated: 2023/10/01 22:45:07 by ramoussa         ###   ########.fr        #
+#    Updated: 2023/10/04 12:00:02 by ramoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,9 @@ clean:
 	@rm -rf ${BONUS_OBJS}
 
 fclean: clean
-	make fclean --directory=${BASELIB}
+	@if [ -d ${BASELIB} ]; then\
+		make fclean --directory=${BASELIB};\
+	fi
 	rm -f ${NAME}
 	rm -f ${B_NAME}
 
